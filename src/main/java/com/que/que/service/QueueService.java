@@ -27,14 +27,14 @@ public class QueueService {
         }
     }
 
-    // Get a user by ID
-    public QueueUser getUserById(String id) {
-        return userMap.get(id);
+    // Get a user by ID/token
+    public QueueUser getUserById(int token) {
+        return userMap.get(token);
     }
     
     // Method to get the next user in the queue
-    public void skipUser(String id) {
-        QueueUser user = userMap.remove(id);
+    public void skipUser(int token) {
+        QueueUser user = userMap.remove(token);
         if (user != null) {
             queue.remove(user);
         }
@@ -47,6 +47,21 @@ public class QueueService {
             userMap.remove(next.getTokenNumber());
         }
         return next;
+    }
+
+    // get position of the user in queue
+    public int getPosition(int token) {
+        if (!userMap.containsKey(token)) {
+            return -1;
+        }
+        List<QueueUser> users = new ArrayList<>(queue);
+        users.sort(QueueUser.PRIORITY_COMPARATOR);
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getTokenNumber() == token) {
+                return i + 1;
+            }
+        }
+        return -1;
     }
 
     public List<QueueUser> getAllUsers() {
