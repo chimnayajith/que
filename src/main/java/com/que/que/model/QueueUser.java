@@ -1,6 +1,7 @@
-package com.que.model;
+package com.que.que.model;
 
 import com.que.enums.QueueStatus;
+import java.util.Comparator;
 
 public class QueueUser {
 
@@ -15,6 +16,7 @@ public class QueueUser {
         this.name = name;
         this.priority = priority;
         this.status = status;
+        this.joinTime = System.currentTimeMillis();
     }
 
     public int getTokenNumber() {
@@ -26,7 +28,7 @@ public class QueueUser {
     }
 
     public int isPriority() {
-        int priority;
+        return priority;
     }
 
     public QueueStatus getStatus() {
