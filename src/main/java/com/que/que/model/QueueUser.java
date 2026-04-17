@@ -36,4 +36,12 @@ public class QueueUser {
     public void setStatus(QueueStatus status) {
         this.status = status;
     }
+    
+    // Comparator for PriorityQueue
+    public static final Comparator<QueueUser> PRIORITY_COMPARATOR = (u1, u2) -> {
+        if (u1.priority != u2.priority) {
+            return Integer.compare(u1.priority, u2.priority); // Lower priority value first
+        }
+        return Long.compare(u1.joinTime, u2.joinTime); // Earlier join time first
+    };
 }
