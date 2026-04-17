@@ -1,13 +1,16 @@
 package com.que.model;
 
+import com.que.enums.QueueStatus;
+
 public class QueueUser {
 
     private int tokenNumber;
     private String name;
-    private boolean priority;
-    private String status;
+    private int priority; //lower value = higher priority
+    private long joinTime;
+    private QueueStatus status;
 
-    public QueueUser(int tokenNumber, String name, boolean priority, String status) {
+    public QueueUser(int tokenNumber, String name, int priority, QueueStatus status) {
         this.tokenNumber = tokenNumber;
         this.name = name;
         this.priority = priority;
@@ -22,15 +25,15 @@ public class QueueUser {
         return name;
     }
 
-    public boolean isPriority() {
-        return priority;
+    public int isPriority() {
+        int priority;
     }
 
-    public String getStatus() {
+    public QueueStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(QueueStatus status) {
         this.status = status;
     }
 }
