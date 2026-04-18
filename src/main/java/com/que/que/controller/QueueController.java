@@ -67,4 +67,14 @@ public class QueueController {
             return user;
         }
 
+    @PostMapping("/skip")
+        public String skipCurrent() {
+
+            QueueUser user = queueService.skipUser();
+            if (user == null) {
+                return "No current user to skip";
+            }
+            return "Current user skipped successfully";
+        }
+
 }
