@@ -1,6 +1,6 @@
 package com.que.que.model;
 
-import com.que.enums.QueueStatus;
+import com.que.que.enums.QueueStatus;
 import java.util.Comparator;
 
 public class QueueUser {

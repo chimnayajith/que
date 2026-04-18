@@ -1,30 +1,42 @@
 package com.que.que.service;
 
 import com.que.que.model.QueueUser;
+import com.que.que.enums.QueueStatus;
+
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class QueueService {
     private final PriorityQueue<QueueUser> queue;
     private final HashMap<Integer, QueueUser> userMap;
 
+    private final AtomicInteger tokenCounter = new AtomicInteger(1);
     public QueueService() {
         // Initialize the PriorityQueue with the custom comparator
         this.queue = new PriorityQueue<>(QueueUser.PRIORITY_COMPARATOR);
         this.userMap = new HashMap<>();
     }
 
+    private int generateToken(){
+        int candidate;
+
+        do{
+            candidate = tokenCounter.getAndUpdate(n -> n == Integer.MAX_VALUE ? 1 : n+1);
+        } while (userMap.containsKey(candidate));
+        return candidate;
+    }
+
     // Method to add a user to the queue
-    public void joinQueue(QueueUser user) {
-        if (!userMap.containsKey(user.getTokenNumber())) {
-            queue.add(user);
-            userMap.put(user.getTokenNumber(), user);
-        } else {
-            System.out.println("User with this ID already exists!");
-        }
+    public QueueUser joinQueue(String name, int priority) {
+        int token = generateToken();
+        QueueUser user = new QueueUser(token, name, priority, QueueStatus.WAITING);
+        queue.add(user);
+        userMap.put(token, user);
+        return user;
     }
 
     // Get a user by ID/token
