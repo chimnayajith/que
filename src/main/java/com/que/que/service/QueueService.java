@@ -3,6 +3,8 @@ package com.que.que.service;
 import com.que.que.model.QueueUser;
 import com.que.que.enums.QueueStatus;
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Service
 public class QueueService {
     private final PriorityQueue<QueueUser> queue;
     private final HashMap<Integer, QueueUser> userMap;

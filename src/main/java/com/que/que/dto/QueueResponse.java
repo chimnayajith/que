@@ -1,4 +1,4 @@
-package com.que.dto;
+package com.que.que.dto;
 
 public class QueueResponse {
     private int token;
