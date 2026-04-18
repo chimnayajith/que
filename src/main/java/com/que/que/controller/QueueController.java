@@ -52,7 +52,9 @@ public class QueueController {
         }
 
     @PostMapping("/next")
-        public QueueUser callNext() {
+        public QueueUser next() {
+            queueService.completeService();
             return queueService.callNext();
         }
+
 }
