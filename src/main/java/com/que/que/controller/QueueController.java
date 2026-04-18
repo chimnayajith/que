@@ -46,4 +46,8 @@ public class QueueController {
             return res;
         }
     
+    @GetMapping("/all")
+        public List<QueueUser> getAll() {
+            return queueService.getAllUsers();
+        }
 }
