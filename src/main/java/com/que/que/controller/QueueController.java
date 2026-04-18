@@ -50,4 +50,9 @@ public class QueueController {
         public List<QueueUser> getAll() {
             return queueService.getAllUsers();
         }
+
+    @PostMapping("/next")
+        public QueueUser callNext() {
+            return queueService.callNext();
+        }
 }
