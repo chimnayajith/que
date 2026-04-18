@@ -56,7 +56,7 @@ public class QueueService {
     // Method to get the next user in the queue
     public QueueUser skipUser() {
         if (currentServingToken == null) return null;
-        QueueUser user = userMap.remove(currentServingToken);
+        QueueUser user = userMap.get(currentServingToken);
         if(user != null){
             user.setStatus(QueueStatus.SKIPPED);
         }
