@@ -57,4 +57,14 @@ public class QueueController {
             return queueService.callNext();
         }
 
+    @GetMapping("/current")
+        public QueueUser getCurrent() {
+
+            QueueUser user = queueService.getCurrentServing();
+            if (user == null) {
+                return null;
+            }
+            return user;
+        }
+
 }
