@@ -1,11 +1,9 @@
 package com.que.dto;
 
-public class QueueResponse {
+public class StatusResponse {
     private int token;
-    private String name;
     private String status;
     private int position;
-    private int estimatedWaitTime;
 
     public int getToken() {
         return token;
@@ -13,14 +11,6 @@ public class QueueResponse {
 
     public void setToken(int token) {
         this.token = token;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getStatus() {
@@ -37,13 +27,5 @@ public class QueueResponse {
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public int getEstimatedWaitTime() {
-        return estimatedWaitTime;
-    }
-
-    public void setEstimatedWaitTime(int estimatedWaitTime) {
-        this.estimatedWaitTime = estimatedWaitTime;
     }
 }
