@@ -17,6 +17,8 @@ public class QueueService {
     private final PriorityQueue<QueueUser> queue;
     private final HashMap<Integer, QueueUser> userMap;
 
+    private Integer currentServingToken = null;
+
     private final AtomicInteger tokenCounter = new AtomicInteger(1);
     public QueueService() {
         // Initialize the PriorityQueue with the custom comparator
@@ -31,6 +33,10 @@ public class QueueService {
             candidate = tokenCounter.getAndUpdate(n -> n == Integer.MAX_VALUE ? 1 : n+1);
         } while (userMap.containsKey(candidate));
         return candidate;
+    }
+
+    public QueueUser getCurrentServing(){
+        return userMap.get(currentServingToken);
     }
 
     // Method to add a user to the queue
@@ -48,12 +54,14 @@ public class QueueService {
     }
     
     // Method to get the next user in the queue
-    public void skipUser(int token) {
-        QueueUser user = userMap.remove(token);
-        if (user != null) {
+    public QueueUser skipUser() {
+        if (currentServingToken == null) return null;
+        QueueUser user = userMap.remove(currentServingToken);
+        if(user != null){
             user.setStatus(QueueStatus.SKIPPED);
-            queue.remove(user);
         }
+        currentServingToken = null;
+        return user;
     }
 
     // Retrieve and remove the next user from the queue
@@ -61,16 +69,18 @@ public class QueueService {
         QueueUser next = queue.poll();
         if (next != null) {
             next.setStatus(QueueStatus.SERVING);
-            userMap.remove(next.getTokenNumber());
+            currentServingToken = next.getTokenNumber();
         }
         return next;
     }
 
-    public QueueUser completeService(int token) {
-        QueueUser user = userMap.remove(token);
+    public QueueUser completeService() {
+        if (currentServingToken == null) return null;
+        QueueUser user = userMap.remove(currentServingToken);
         if (user != null) {
             user.setStatus(QueueStatus.COMPLETED);
         }
+        currentServingToken = null;
         return user;
     }
 
