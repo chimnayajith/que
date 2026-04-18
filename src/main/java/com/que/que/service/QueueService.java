@@ -51,6 +51,7 @@ public class QueueService {
     public void skipUser(int token) {
         QueueUser user = userMap.remove(token);
         if (user != null) {
+            user.setStatus(QueueStatus.SKIPPED);
             queue.remove(user);
         }
     }
@@ -59,9 +60,18 @@ public class QueueService {
     public QueueUser callNext() {
         QueueUser next = queue.poll();
         if (next != null) {
+            next.setStatus(QueueStatus.SERVING);
             userMap.remove(next.getTokenNumber());
         }
         return next;
+    }
+
+    public QueueUser completeService(int token) {
+        QueueUser user = userMap.remove(token);
+        if (user != null) {
+            user.setStatus(QueueStatus.COMPLETED);
+        }
+        return user;
     }
 
     // get position of the user in queue
@@ -75,6 +85,11 @@ public class QueueService {
             if (users.get(i).getTokenNumber() == token) {
                 return i + 1;
             }
+        }
+        // if serving or completed, position is 0 or -1 depending on desired contract
+        QueueUser u = userMap.get(token);
+        if (u != null && u.getStatus() == QueueStatus.SERVING) {
+            return 0; // 0 indicates currently being served
         }
         return -1;
     }
