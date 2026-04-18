@@ -34,5 +34,16 @@ public class QueueController {
             return res;
         }
 
+    @GetMapping("/status/{id}")
+        public StatusResponse getStatus(@PathVariable int id) {
+            QueueUser user = queueService.getUserById(id);
+
+            StatusResponse res = new StatusResponse();
+            res.setToken(id);
+            res.setStatus(user.getStatus().toString());
+            res.setPosition(queueService.getPosition(id));
+
+            return res;
+        }
     
 }
