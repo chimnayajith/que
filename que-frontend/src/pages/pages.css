@@ -1,0 +1,171 @@
+/* Home / common page styles */
+.home-viewport {
+  min-height: calc(100svh - 0px);
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  padding: 56px 16px;
+}
+.home-card {
+  max-width: 420px;
+  width: min(92vw, 420px);
+  background: var(--bg);
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+  padding: 30px 28px;
+  text-align: center;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+.home-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #0f1724; /* dark navy */
+  color: var(--bg);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin: 0 auto 14px;
+  box-shadow: inset 0 -4px 0 rgba(255,255,255,0.02);
+}
+.home-title { margin: 4px 0 6px; font-size: 20px; color: #0b1220; font-weight:700 }
+.home-sub { color: #8b97a6; font-size: 13px; margin-bottom: 18px }
+
+.home-form { display:flex; flex-direction:column; gap:12px; align-items:stretch }
+.field-label { display:block; text-align:left; font-size:12px; color:var(--text); margin-left:4px }
+.field-input { padding: 12px 14px; border: 1px solid #e6e7ea; border-radius: 8px; font-size:15px; background: var(--bg); width:100%; box-sizing:border-box; color: var(--text-h) }
+.field-input::placeholder { color: var(--text) }
+.home-cta { background: #80848c; color: #fff; border:none; padding:12px 14px; border-radius:8px; cursor:pointer; font-weight:700; width:100% }
+.home-cta:enabled { background: #0b1220 }
+.home-cta:disabled { opacity:0.6; cursor:not-allowed }
+
+.list { display:flex; gap:12px; justify-content:center }
+.token-card { background:var(--bg); padding:18px; border-radius:8px; min-width:120px }
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .home-card {
+    padding: 18px 14px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  .home-title { font-size: 18px; line-height: 1.1 }
+  .home-icon { width:48px; height:48px; font-size:18px }
+  .home-sub { font-size: 13px; margin-bottom: 12px }
+  .field-input { font-size: 15px; padding: 12px 12px }
+  .home-cta { padding: 12px 12px }
+  .home-form { gap: 10px }
+  .home-viewport { padding: 18px 12px }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .home-card { width: 86vw }
+}
+
+.token-label { font-size: 13px; color: #94a3b8; margin: 0; }
+.token-number { font-size: 44px; font-weight: 700; color: #fff; letter-spacing: -0.8px; margin: 0; }
+
+/* Badges */
+.badge { border-radius: 999px; padding: 5px 18px; font-size: 13px; font-weight: 600; }
+.badge-waiting { background: #334155; color: #94a3b8; }
+.badge-called  { background: #f59e0b; color: #fff; }
+.badge-priority { background: #f59e0b; color: #fff; }
+
+/* Called banner */
+.called-banner {
+  width: 100%;
+  background: #f59e0b;
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.page-center {
+  min-height: 100svh;
+  background: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;    /* add this */
+  padding: 2rem 1rem;
+  gap: 1rem;
+  box-sizing: border-box;  
+}
+/* Card stack */
+.card-stack {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.10);
+  box-sizing: border-box;
+}
+
+/* Token card (dark top) */
+.token-card {
+  width: 100%;
+  background: #0f172a;
+  border-radius: 0;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Info card (white bottom) */
+.info-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+/* Each row is now its own rounded card */
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.info-label { font-size: 14px; color: #475569; display: flex; align-items: center; gap: 8px; }
+.info-value  { font-size: 17px; font-weight: 700; color: #0f172a; }
+
+/* Stay nearby box — also its own rounded card */
+.info-stay {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.stay-title { font-size: 14px; font-weight: 600; color: #0f172a; margin: 0 0 4px; }
+.stay-sub   { font-size: 13px; color: #94a3b8; line-height: 1.5; margin: 0; }
+
+/* Back link */
+.link-back {
+  font-size: 14px; color: #475569;
+  background: none; border: none; cursor: pointer;
+}
